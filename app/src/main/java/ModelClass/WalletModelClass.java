@@ -1,5 +1,7 @@
 package ModelClass;
 
+import Domain.UrlConfig;
+
 /**
  * Created by wolfsoft5 on 18/9/18.
  */
@@ -12,10 +14,14 @@ public class WalletModelClass {
     String percentage;
     Integer arrow;
     String price;
-    String value;
+    int value;
 
 
-    public WalletModelClass(String title, Integer icon, String icon_type, String percentage, Integer arrow, String price, String value) {
+
+    UrlConfig urlConfig;
+
+
+    public WalletModelClass(String title, Integer icon, String icon_type, String percentage, Integer arrow, String price, int value,UrlConfig urlConfig) {
         this.title = title;
         this.icon = icon;
         this.icon_type = icon_type;
@@ -23,6 +29,7 @@ public class WalletModelClass {
         this.arrow = arrow;
         this.price = price;
         this.value = value;
+        this.urlConfig = urlConfig;
     }
 
 
@@ -74,11 +81,18 @@ public class WalletModelClass {
         this.price = price;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
+    }
+    public UrlConfig getUrlConfig() {
+        return urlConfig;
+    }
+
+    public void setUrlConfig(UrlConfig urlConfig) {
+        this.urlConfig = urlConfig;
     }
 }

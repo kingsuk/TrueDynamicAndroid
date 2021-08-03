@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DetailedSnowActivity"></activity>
+        <activity
+            android:name=".DetailedView"
+            android:label="@string/title_activity_detailed_view"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".WSSplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +31,7 @@
         <activity android:name=".TradeCryptoStarActivity" />
         <activity android:name=".WalletCryptoStarActivity" />
         <activity android:name=".AlertCryptoStarActivity" />
-        <activity android:name=".ChartCryptoStarActivity"></activity>
+        <activity android:name=".ChartCryptoStarActivity" />
     </application>
 
 </manifest>

@@ -24,7 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\kingsuk.majumder\AppData\Local\Temp\baseline_dashboard_24.xml" />
+                                                <entry key="imagePath" value="C:\Users\kingsuk.majumder\AppData\Local\Temp\baseline_account_circle_24.xml" />
                                                 <entry key="opacityPercent" value="80" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
@@ -37,7 +37,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/dashboard/baseline_dashboard_24.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/account_circle/baseline_account_circle_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -49,8 +49,9 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\kingsuk.majumder\Downloads\TrueDynamics-logo (2)\cover.png" />
+                                                <entry key="imagePath" value="C:\Users\kingsuk.majumder\Downloads\windows_tower.png" />
                                                 <entry key="opacityPercent" value="80" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -62,6 +63,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="80" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -73,6 +76,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="80" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -82,10 +87,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="C:\Users\kingsuk.majumder\Downloads\TrueDynamics-logo (2)\cover.png" />
-                                      <entry key="outputName" value="ic_wallet_gray" />
+                                      <entry key="imageAsset" value="C:\Users\kingsuk.majumder\Downloads\windows_tower.png" />
+                                      <entry key="outputName" value="ic_user" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="a8a7a9" />
+                                      <entry key="themeColor" value="0c0c0c" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--in this we are displaying a nested scroll view-->
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idNestedSV"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailedSnowActivity"
+    android:background="#F6F6F6">
+
+
+
+
+    <!--linear layout for displaying
+        our recycler view-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:padding="28.7dp"
+            android:weightSum="2"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <customfonts.TextViewSFProDisplayRegular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Count"
+                    android:textSize="17.3sp"
+                    android:id="@+id/tvReportName"
+                    android:textColor="@color/light_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+                    <customfonts.TextViewSFProDisplayRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="28.3sp"
+                        android:textColor="@color/txt_color"
+                        android:text="0"
+                        android:id="@+id/tvTotalCountReport"
+                        />
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <!--recycler view for displaying our list of data
+            and we are making nested scroll for our
+            recycler view as false-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/idRVUsers"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/snow_item"
+            />
+
+        <!--we are adding progress bar
+            for the purpose of loading-->
+        <ProgressBar
+            android:id="@+id/idPBLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

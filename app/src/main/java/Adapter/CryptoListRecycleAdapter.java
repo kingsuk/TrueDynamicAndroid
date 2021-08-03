@@ -67,7 +67,7 @@ public class CryptoListRecycleAdapter extends RecyclerView.Adapter<CryptoListRec
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder,final int position) {
         CryptoListModelClass lists = OfferList.get(position);
         holder.title.setText(lists.getTitle());
 

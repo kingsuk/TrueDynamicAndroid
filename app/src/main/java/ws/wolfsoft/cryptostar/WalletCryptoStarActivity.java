@@ -1,8 +1,11 @@
 package ws.wolfsoft.cryptostar;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +40,7 @@ import Adapter.CryptoListRecycleAdapter;
 import Adapter.WalletRecycleAdapter;
 import Domain.SnowCount;
 import Domain.UrlConfig;
+import Domain.User;
 import ModelClass.CryptoListModelClass;
 import ModelClass.WalletModelClass;
 import ws.wolfsoft.cryptostar.Helper.StaticEntityHelper;
@@ -43,9 +48,11 @@ import ws.wolfsoft.cryptostar.Helper.StaticEntityHelper;
 public class WalletCryptoStarActivity extends AppCompatActivity implements View.OnClickListener{
 
 
+    int totalCount = 0;
+    int itemCounter = 0;
 
     ImageView wallet_img,chart_img,trading_img,alert_img,setting_img;
-    TextView wallet_txt,chart_txt,trading_txt,alert_txt,setting_txt;
+    TextView wallet_txt,chart_txt,trading_txt,alert_txt,setting_txt,tvTotalCount,tvUserName;
     LinearLayout linear1,linear2,linear3,linear4,linear5;
 
 
@@ -64,6 +71,7 @@ public class WalletCryptoStarActivity extends AppCompatActivity implements View.
 
 
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,17 +83,31 @@ public class WalletCryptoStarActivity extends AppCompatActivity implements View.
         recyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(WalletCryptoStarActivity.this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
+
+//        recyclerView.getViewTreeObserver()
+//                .addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+//                    @Override
+//                    public void onScrollChanged() {
+//                        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+//
+//                        int pos = linearLayoutManager.find();
+//
+//                        Log.i("response","verticle: "+pos);
+//                    }
+//                });
+
+
 
 
         walletModelClasses = new ArrayList<>();
 
-        for (int i = 0; i < title.length; i++) {
-            WalletModelClass beanClassForRecyclerView_contacts = new WalletModelClass(title[i],icon[i],icon_type[i],
-                    percentage[i],arrow[i],price[i],value[i]);
-            walletModelClasses.add(beanClassForRecyclerView_contacts);
-        }
+//        for (int i = 0; i < title.length; i++) {
+//            WalletModelClass beanClassForRecyclerView_contacts = new WalletModelClass(title[i],icon[i],icon_type[i],
+//                    percentage[i],arrow[i],price[i],value[i]);
+//            walletModelClasses.add(beanClassForRecyclerView_contacts);
+//        }
 
         bAdapter = new WalletRecycleAdapter(WalletCryptoStarActivity.this,walletModelClasses);
         recyclerView.setAdapter(bAdapter);
@@ -93,6 +115,10 @@ public class WalletCryptoStarActivity extends AppCompatActivity implements View.
         Toast.makeText(getApplicationContext(),"Fetching report urls.",Toast.LENGTH_LONG).show();
         volleyGet();
 
+        tvTotalCount = findViewById(R.id.tvTotalCount);
+        tvUserName = findViewById(R.id.tvUserName);
+        String userName = getPref("userInfo",getApplicationContext()).Name;
+        tvUserName.setText(userName);
 
 
         wallet_img = findViewById(R.id.wallet_img);
@@ -124,7 +150,7 @@ public class WalletCryptoStarActivity extends AppCompatActivity implements View.
     public void volleyGet()
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = StaticEntityHelper.BASE_URL+"UrlConfigApil";
+        String url = StaticEntityHelper.BASE_URL+"UrlConfigApil/GetUrl_config_tabl";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -173,10 +199,17 @@ public class WalletCryptoStarActivity extends AppCompatActivity implements View.
         queue.add(stringRequest);
     }
 
-
+    public User getPref(String key, Context context) {
+        SharedPreferences preferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        String userInfo = preferences.getString(key, null);
+        JsonElement mJson =  JsonParser.parseString(userInfo);
+        Gson gson = new Gson();
+        User user = gson.fromJson(mJson, User.class);
+        return user;
+    }
 
     public void volleyPost(UrlConfig urlConfig){
-        String postUrl = StaticEntityHelper.BASE_URL+"SnowHelperApi";
+        String postUrl = StaticEntityHelper.BASE_URL+"SnowHelperApi/SnowGenericCall";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JSONObject postData = new JSONObject();
@@ -196,11 +229,16 @@ public class WalletCryptoStarActivity extends AppCompatActivity implements View.
                 Gson gson = new Gson();
                 SnowCount snowCount = gson.fromJson(mJson, SnowCount.class);
 
+                totalCount = totalCount + Integer.parseInt(snowCount.result.stats.count);
+
                 WalletModelClass beanClassForRecyclerView_contacts = new WalletModelClass(urlConfig.Endpoint_name,icon[0],icon_type[0],
-                        percentage[0],arrow[0],snowCount.result.stats.count,value[0]);
+                        percentage[0],arrow[0],snowCount.result.stats.count,itemCounter,urlConfig);
                 walletModelClasses.add(beanClassForRecyclerView_contacts);
 
                 bAdapter.notifyItemInserted(walletModelClasses.size()-1);
+                itemCounter++;
+
+                tvTotalCount.setText(""+totalCount);
 
 
 //                SharedPreferences.Editor editor = getSharedPreferences("UserData", MODE_PRIVATE).edit();

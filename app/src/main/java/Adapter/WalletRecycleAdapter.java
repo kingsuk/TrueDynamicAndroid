@@ -2,24 +2,31 @@ package Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
+import Domain.UrlConfig;
 import ModelClass.CryptoListModelClass;
 import ModelClass.WalletModelClass;
 import ws.wolfsoft.cryptostar.CreatePinAcitivyt;
+import ws.wolfsoft.cryptostar.DetailedSnowActivity;
+import ws.wolfsoft.cryptostar.DetailedView;
 import ws.wolfsoft.cryptostar.LoginActivity;
 import ws.wolfsoft.cryptostar.R;
 import ws.wolfsoft.cryptostar.SignupActivity;
 import ws.wolfsoft.cryptostar.SplashScreenActivity;
 import ws.wolfsoft.cryptostar.TradeCryptoStarActivity;
+import ws.wolfsoft.cryptostar.WalletCryptoStarActivity;
 
 
 public class WalletRecycleAdapter extends RecyclerView.Adapter<WalletRecycleAdapter.MyViewHolder> {
@@ -33,22 +40,30 @@ public class WalletRecycleAdapter extends RecyclerView.Adapter<WalletRecycleAdap
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView title,icon_type,percentage,price,value;
-        ImageView icon,arrow;
+        TextView title,price;
+
 
 
         public MyViewHolder(View view) {
             super(view);
 
             title = (TextView) view.findViewById(R.id.title);
-            icon_type = (TextView) view.findViewById(R.id.icon_type);
-            percentage = (TextView) view.findViewById(R.id.percentage);
             price = (TextView) view.findViewById(R.id.price);
-            value = (TextView) view.findViewById(R.id.value);
-            icon = (ImageView) view.findViewById(R.id.icon);
-            arrow = (ImageView) view.findViewById(R.id.arrow);
 
 
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = (int) title.getTag();
+                    UrlConfig urlConfig = OfferList.get(position).getUrlConfig();
+                    urlConfig.Count = Integer.parseInt(price.getText().toString());
+                    Intent intent = new Intent(context, DetailedSnowActivity.class);
+                    intent.putExtra("urlConfig", (Parcelable) urlConfig);
+                    context.startActivity(intent);
+                    Log.i("response",urlConfig.toString()+"");
+
+                }
+            });
 
         }
 
@@ -59,6 +74,8 @@ public class WalletRecycleAdapter extends RecyclerView.Adapter<WalletRecycleAdap
         this.OfferList = offerList;
         this.context = context;
     }
+
+
 
     @Override
     public WalletRecycleAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -75,15 +92,9 @@ public class WalletRecycleAdapter extends RecyclerView.Adapter<WalletRecycleAdap
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         WalletModelClass lists = OfferList.get(position);
         holder.title.setText(lists.getTitle());
-        holder.icon.setImageResource(lists.getIcon());
-        holder.icon_type.setText(lists.getIcon_type());
-        holder.percentage.setText(lists.getPercentage());
-        holder.arrow.setImageResource(lists.getArrow());
         holder.price.setText(lists.getPrice());
-        holder.value.setText(lists.getValue());
-
-
-
+        holder.title.setTag(lists.getValue());
+        holder.price.setTag(lists.getUrlConfig());
 
     }
 

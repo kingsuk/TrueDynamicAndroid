@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void volleyPost(String userName,String password){
-        String postUrl = StaticEntityHelper.BASE_URL+"UserDataAPI";
+        String postUrl = StaticEntityHelper.BASE_URL+"UserDataAPI/PostUser_Data";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JSONObject postData = new JSONObject();
