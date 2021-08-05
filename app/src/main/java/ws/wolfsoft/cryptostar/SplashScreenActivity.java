@@ -1,6 +1,7 @@
 package ws.wolfsoft.cryptostar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -19,8 +20,18 @@ public class SplashScreenActivity extends AppCompatActivity {
                     // Thread will sleep for 3 seconds
                     sleep(3000);
 
-                    Intent intent = new Intent(SplashScreenActivity.this,LoginActivity.class);
-                    startActivity(intent);
+                    SharedPreferences preferences = getSharedPreferences("UserData", MODE_PRIVATE);
+                    String userInfo = preferences.getString("userInfo", null);
+                    if(userInfo==null)
+                    {
+                        Intent intent = new Intent(SplashScreenActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(SplashScreenActivity.this,WalletCryptoStarActivity.class);
+                        startActivity(intent);
+                    }
 
 
                     // After 5 seconds redirect to another intent

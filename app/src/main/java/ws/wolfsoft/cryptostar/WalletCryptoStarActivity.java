@@ -353,6 +353,13 @@ public class WalletCryptoStarActivity extends AppCompatActivity implements View.
                 alert_txt.setTextColor(Color.parseColor("#a6b0b9"));
                 setting_txt.setTextColor(Color.parseColor("#141a22"));
 
+                SharedPreferences.Editor editor = getSharedPreferences("UserData", MODE_PRIVATE).edit();
+                editor.putString("userInfo", null);
+                editor.apply();
+
+                Intent intent = new Intent(WalletCryptoStarActivity.this,LoginActivity.class);
+                startActivity(intent);
+
                 break;
 
         }

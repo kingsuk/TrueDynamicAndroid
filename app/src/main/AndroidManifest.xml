@@ -6,9 +6,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_td"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DetailedSnowActivity"></activity>
@@ -17,14 +16,16 @@
             android:label="@string/title_activity_detailed_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".WSSplashScreenActivity">
+
+        </activity>
+        <activity android:name=".CryptoListActivity" />
+        <activity android:name=".SplashScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CryptoListActivity" />
-        <activity android:name=".SplashScreenActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".CreatePinAcitivyt" />
